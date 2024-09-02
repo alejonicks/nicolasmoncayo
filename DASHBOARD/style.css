@@ -1,0 +1,329 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+/* Importa la fuente "Poppins" desde Google Fonts */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+/* Elimina márgenes y rellenos predeterminados, establece el box-sizing para el modelado de caja y aplica la fuente "Poppins" a todo el documento */
+
+:root {
+    --clr: #14161e;
+}
+/* Define una variable CSS (clr) para el color de fondo principal (#14161e) */
+
+body {
+    min-height: 100vh;
+    background: var(--clr);
+}
+/* Establece la altura mínima del cuerpo de la página como 100vh (100% de la altura de la ventana) y aplica el color de fondo de la variable "clr" */
+
+.sidebar {
+    position: absolute;
+    width: 80px;
+    height: 100vh;
+    background: #fff;
+    transition: width 0.5s ease, transform 0.5s ease;
+    padding-left: 10px;
+    overflow: hidden;
+}
+/* Define la barra lateral (sidebar) con una anchura inicial de 80px, altura completa de la ventana y fondo blanco. Añade transiciones suaves para el cambio de ancho y transformación */
+
+.sidebar.active {
+    width: 300px;
+}
+/* Cuando la barra lateral tiene la clase "active", su anchura se expande a 300px */
+
+.sidebar ul {
+    position: relative;
+    height: 100vh;
+}
+/* La lista dentro de la barra lateral ocupa toda la altura disponible */
+
+.sidebar ul li {
+    position: relative;
+    list-style: none;
+}
+/* Los elementos de la lista no tienen estilo de lista predeterminado (sin viñetas) */
+
+.sidebar ul li.active {
+    background: var(--clr);
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+/* El elemento activo del menú cambia su fondo al color principal definido por la variable "clr" y redondea las esquinas izquierda superior e inferior */
+
+.sidebar ul li.active::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 5px 5px 0 5px var(--clr);
+    background: transparent;
+}
+/* Añade un pseudo-elemento (::before) en la parte superior derecha del elemento activo, creando un efecto visual con un borde redondeado y sombra */
+
+.sidebar ul li.active::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 5px -5px 0 5px var(--clr);
+    background: transparent;
+}
+/* Añade otro pseudo-elemento (::after) en la parte inferior derecha del elemento activo, similar al ::before, para completar el efecto visual */
+
+.sidebar ul li.logo {
+    margin-bottom: 50px;
+}
+/* Añade un margen inferior al logo dentro de la barra lateral */
+
+.sidebar ul li.logo .icon {
+    font-size: 2em;
+    color: var(--clr);
+    z-index: 1;
+}
+/* Estilo del ícono en el logo, aumentando su tamaño y aplicando el color principal definido por la variable "clr" */
+
+.sidebar ul li.logo .text {
+    font-size: 1.2em;
+    font-weight: 500;
+    color: var(--clr);
+}
+/* Estilo del texto en el logo, ajustando su tamaño de fuente, peso y color */
+
+.sidebar ul li a {
+    position: relative;
+    display: flex;
+    white-space: nowrap;
+    text-decoration: none;
+}
+/* Estilo para los enlaces en la barra lateral, usando flexbox para el alineamiento, eliminando la decoración de texto y evitando el salto de línea en texto largo */
+
+.sidebar ul li a .icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 60px;
+    padding-left: 10px;
+    height: 70px;
+    font-size: 1.5em;
+    color: #333;
+    transition: color 0.5s ease;
+}
+/* Estilo para los íconos dentro de los enlaces: centrado vertical y horizontal, tamaño mínimo, relleno, y transición de color suave */
+
+.sidebar ul li a .text {
+    position: relative;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    color: #333;
+    padding-left: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.5s;
+}
+/* Estilo para el texto de los enlaces: centrado vertical, tamaño de fuente, color, relleno, transformación a mayúsculas, espaciado entre letras y transición de color suave */
+
+.sidebar ul li.active a .icon {
+    color: #fff;
+    
+}
+/* El ícono del enlace en el elemento activo cambia a color blanco */
+
+.sidebar ul li.active a .text {
+    color: var(--bg);
+}
+/* El texto del enlace en el elemento activo toma el color de fondo definido por la variable "bg" */
+
+.sidebar ul li:hover a .icon,
+.sidebar ul li:hover a .text {
+    color: var(--bg);
+}
+/* Cambia el color del ícono y del texto en los enlaces al pasar el cursor sobre ellos */
+.sidebar ul li.active a .icon::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    width: 60px;
+    height: 60px; /* Añade altura para mantener el cuadro en forma de círculo */
+    background: var(--bg); /* Color de fondo del círculo */
+    border-radius: 50%; /* Asegúrate de que el cuadro tenga forma de círculo */
+    transition: 0.5s;
+    z-index: 0; /* El cuadro debe estar detrás del contenido del logo */
+}
+
+/* Añade un círculo de fondo al ícono del enlace activo, centrado dentro del ícono, con una transición suave */
+
+.sidebar ul li:hover.active a .icon::before {
+    background: #fff;
+}
+/* Cambia el color de fondo del círculo en el ícono del enlace activo cuando el cursor está sobre él */
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+/* Posiciona el contenido de la parte inferior de la barra lateral al final y ocupa todo el ancho */
+
+.imgBx {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+/* Estilo para el contenedor de la imagen de perfil, asegurando que sea circular y que la imagen no se desborde */
+
+.imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    align-items: center;
+}
+/* La imagen de perfil se ajusta para cubrir completamente el contenedor circular, centrándose en su contenido */
+
+.menuToggle {
+    position: absolute;
+    top: 20px;
+    left: 20px; /* Ajusta la posición inicial del botón */
+    width: 50px;
+    height: 50px;
+    background: #31a4ff;
+    z-index: 1000;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease, left 0.5s ease; /* Añade transición para el desplazamiento */
+}
+
+.menuToggle::before,
+.menuToggle::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    background: #fff;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.menuToggle::before {
+    transform: translateY(-9px);
+    box-shadow: 0 9px 0 #fff;
+}
+
+.menuToggle::after {
+    transform: translateY(9px);
+}
+
+.sidebar.active ~ .menuToggle {
+    left: calc(300px + 20px); /* Ajusta la posición del botón al expandir el sidebar */
+}
+
+.menuToggle.active::before {
+    transform: translateY(0px) rotate(45deg);
+    box-shadow: 0 0 0 #fff;
+}
+
+.menuToggle.active::after {
+    transform: translateY(0px) rotate(-45deg);
+}
+/* Cuando el menú hamburguesa está activo, las líneas se transforman en una X */
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: white;
+    text-align: center;
+}
+/* El contenedor de contenido (#content) está centrado vertical y horizontalmente, con texto blanco y centrado */
+
+#content h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+/* Estilo para los encabezados en el contenido, con un tamaño de fuente mayor y margen inferior */
+
+.content {
+    margin-left: 80px; /* El mismo ancho que el sidebar comprimido */
+    transition: margin-left 0.5s ease;
+    padding: 20px; /* Para dar espacio alrededor del contenido */
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
+}
+
+/* Estilos adicionales para la sección "INICIO" */
+
+/* Estilo para los encabezados secundarios dentro del contenido */
+#content h3 {
+    font-size: 1.8em;
+    color: #31a4ff; /* Mismo color que el botón de menú */
+    margin-bottom: 15px;
+}
+
+/* Estilo para los párrafos dentro del contenido */
+#content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #d3d3d3; /* Color gris claro para el texto */
+    margin-bottom: 20px;
+}
+
+/* Estilo para resaltar secciones importantes */
+#content p span {
+    color: #fff; /* Texto blanco para resaltar */
+    font-weight: 600; /* Negrita para resaltar importancia */
+}
+.logout-message {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1000;
+    animation: fadeInOut 3s ease-out;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+}

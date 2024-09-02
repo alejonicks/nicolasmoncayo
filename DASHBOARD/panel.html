@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANEL DE CONTROL</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .qr-code {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .qr-code img {
+            width: 150px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="menuToggle"></div>
+
+    <div class="sidebar">
+        <ul>
+            <li class="logo" style="--bg: #333;">
+                <a href="#">
+                    <div class="icon"><i class='bx bxl-steam'></i></div>
+                    <div class="text">SUPERGIROS</div>
+                </a>
+            </li>
+            
+            <div class="Menulist">
+                <li style="--bg: #dc5eea;" data-section="inicio">
+                    <a href="#">
+                        <div class="icon"><i class='bx bxs-home'></i></div>
+                        <div class="text">INICIO</div>
+                    </a>    
+                </li>
+                <li style="--bg: #caf200;" data-section="perfil">
+                    <a href="#">
+                        <div class="icon"><i class='bx bxs-user-circle'></i></div>
+                        <div class="text">PERFIL</div>
+                    </a>    
+                </li>
+                <li style="--bg: #33ff5b;" data-section="bandeja">
+                    <a href="#">
+                        <div class="icon"><i class='bx bxs-inbox'></i></div>
+                        <div class="text">BANDEJA</div>
+                    </a>    
+                </li>
+                <li style="--bg: #1a94e0;" data-section="estadisticas">
+                    <a href="#">
+                        <div class="icon"><i class='bx bxs-bar-chart-alt-2'></i></div>
+                        <div class="text">ESTADISTICAS</div>
+                    </a>
+                </li>
+                <li style="--bg: #7c17e9;" data-section="panel">
+                    <a href="#">
+                        <div class="icon"><i class='bx bxs-cart-alt'></i></div>
+                        <div class="text">PANEL</div>
+                    </a>
+                </li>
+                <li style="--bg: #e828d1;" data-section="configuracion">
+                    <a href="#">
+                        <div class="icon"><i class='bx bxs-cog'></i></div>
+                        <div class="text">CONFIGURACION</div>
+                    </a>
+                </li>
+            </div>
+
+            <div class="bottom">
+                <li style="--bg: #333;">
+                    <a href="#">
+                        <div class="icon">
+                            <div class="imgBx">
+                                <img src="img.jpg">
+                            </div>
+                        </div>
+                        <div class="text">DARIO IMBAJOA</div>
+                    </a>
+                </li>
+                <li style="--bg: #333;" data-section="logout">
+                    <a href="#">
+                        <div class="icon"><i class='bx bx-log-out'></i></div>
+                        <div class="text">LOGOUT</div>
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </div>
+
+    <div id="content" class="content">
+        <h2>Bienvenido al Panel de Control</h2>
+        <p>Seleccione una opción del menú para ver más detalles.</p>
+    </div>
+
+    <div id="logout-message" class="logout-message">CERRANDO SESIÓN...</div>
+
+    <!-- Código QR -->
+    <div class="qr-code">
+        <img src="istockphoto-828088276-612x612.jpg" alt="QR Code para el Panel de Control">
+    </div>
+
+    <script>
+        let menuToggle = document.querySelector('.menuToggle');
+        let sidebar = document.querySelector('.sidebar');
+        let content = document.querySelector('#content');
+        let logoutMessage = document.getElementById('logout-message');
+
+        menuToggle.onclick = function() {
+            menuToggle.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            if(sidebar.classList.contains('active')) {
+                menuToggle.style.left = '310px';
+                content.style.marginLeft = '300px';
+            } else {
+                menuToggle.style.left = '20px';
+                content.style.marginLeft = '0';
+            }
+        };
+
+        let menuItems = document.querySelectorAll('.Menulist li');
+
+        function updateContent(section) {
+            let title = "";
+            let text = "";
+
+            switch(section) {
+                case "inicio":
+                    title = "¡Bienvenido a Supergiros!";
+                    text = `
+                        <p>Aquí puedes buscar información sobre la empresa.</p>
+                        <h3>¿De qué trata esta página?</h3>
+                        <p>Esta página web está diseñada para facilitar el manejo de inventario de activos y controlarlos en tiempo real <br>dentro de la empresa Supergiros. Podrás solicitar, llenar formularios,<br> y ver la ubicación de activos y pasivos en la bodega o en puntos específicos.</p>
+                        <h3>Novedades y Noticias</h3>
+                        <p>Mantente al tanto de las últimas noticias relacionadas con Supergiros. <br>Aquí encontrarás actualizaciones importantes y novedades que podrían interesarte.</p>
+                    `;
+                    break;
+                case "perfil":
+                    title = "Perfil del Usuario";
+                    text = "Consulta y actualiza la información de tu perfil.<br>Aquí puedes cambiar tu foto, actualizar datos personales y más.";
+                    break;
+                case "bandeja":
+                    title = "Bandeja de Entrada";
+                    text = "Revisa los mensajes y notificaciones importantes.<br>Mantente al día con la comunicación interna.";
+                    break;
+                case "estadisticas":
+                    title = "Estadísticas del Sistema";
+                    text = "Consulta el rendimiento y las estadísticas clave de Supergiros.<br>Información detallada y gráficos interactivos.";
+                    break;
+                case "panel":
+                    title = "Panel de Gestión";
+                    text = "Accede a las herramientas de administración y gestión del sistema.<br>Controla y personaliza tus opciones.";
+                    break;
+                case "configuracion":
+                    title = "Configuración del Sistema";
+                    text = "Ajusta las preferencias y configura las opciones de Supergiros<br>para adaptarlas a tus necesidades.";
+                    break;
+                case "logout":
+                    logoutMessage.style.display = 'block';
+                    setTimeout(function() {
+                        logoutMessage.style.display = 'none';
+                        window.location.href = 'login.html';
+                    }, 3000);
+                    return;
+                default:
+                    title = "Bienvenido al Panel de Control";
+                    text = "Seleccione una opción del menú para ver más detalles.";
+            }
+
+            content.innerHTML = `<h2>${title}</h2><p>${text}</p>`;
+        }
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                menuItems.forEach(item => item.classList.remove('active'));
+                this.classList.add('active');
+                let section = this.getAttribute('data-section');
+                updateContent(section);
+            });
+        });
+    </script>
+</body>
+</html>
